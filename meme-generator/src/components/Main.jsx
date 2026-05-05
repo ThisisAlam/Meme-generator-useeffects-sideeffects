@@ -7,7 +7,26 @@ export default function Main() {
         topText : "One does not simply",
         bottomText: "Walk into Mordor"
     })
-    console.log(meme)
+    
+    const [memeData, setMemeData] = React.useState([])
+    
+    const [count, setCount] = React.useState(0)
+    
+    React.useEffect(()=>{
+        fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(data => setMemeData(data.data.memes))
+    },[])
+
+    function displayMeme(){
+        if (memeData.length === 0) return   // safety check
+        const random = Math.floor(Math.random() * memeData.length)
+        const memeUrl = memeData[random].url
+        setMeme(prev => ({
+            ...prev,
+            imageUrl: memeUrl
+        }))
+    }
 
     function handleChange(event){
         const {value, name} = event.currentTarget
@@ -28,7 +47,7 @@ export default function Main() {
                         name="topText"
                         value={meme.topText}
                         onChange={handleChange}
-                    />
+                    />  
                 </label>
 
                 <label>Bottom Text
@@ -40,10 +59,10 @@ export default function Main() {
                         onChange={handleChange}
                     />
                 </label>
-                <button>Get a new meme image 🖼</button>
+                <button onClick={displayMeme}>Get a new meme image 🖼</button>
             </div>
             <div className="meme">
-                <img src={meme.imageUrl} />
+                <img src={meme.imageUrl} alt="Meme"/>
                 <span className="top">{meme.topText}</span>
                 <span className="bottom">{meme.bottomText}</span>
             </div>

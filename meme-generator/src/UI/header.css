@@ -1,0 +1,17 @@
+.header{
+    background-color: #9425bd;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+}
+.header>img{
+    width: 40px;
+    margin-left: 1rem;
+}
+.header>h1{
+    color: whitesmoke;
+    margin: 0;
+    font-size: 1.5rem;
+}

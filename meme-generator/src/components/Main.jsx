@@ -1,6 +1,8 @@
+import "../UI/main.css"
+
 export default function Main() {
     return (
-        <main>
+        <main className="main">
             <div className="form">
                 <label>Top Text
                     <input
